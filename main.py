@@ -1,11 +1,22 @@
 #! python3
-import psutil
 
-def get_active_process():
-    for proc in psutil.process_iter(['pid', 'name']):
-        print(proc.info['name'])
+import psutil
+import pygetwindow as gw
+import time
+
+def get_active_window_title():
+    try:
+        active_window = gw.getActiveWindow()
+        return active_window
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+
 
 if __name__ == "__main__":
     print("daytracker v0.0.0")
 
-    get_active_process()
+    while True:
+        current = gw.getActiveWindow()
+        print(current)
+        time.sleep(5)
